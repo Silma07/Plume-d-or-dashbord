@@ -56,3 +56,45 @@ with col3:
 with col4:
     st.metric("📈 Bénéfice Août", f"{benefice_aout:,} FCFA",
               delta=f"{benefice_aout - benefice_juillet:,} FCFA")
+# ── Graphiques ───────────────────────────────────────────────
+st.markdown("---")
+st.subheader("📈 Analyse des ventes")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("**Ventes par produit — Juillet**")
+    fig1, ax1 = plt.subplots(figsize=(6, 4))
+    df_ventes_juillet = df_ventes[df_ventes["Revenu Juillet"] > 0]
+    ax1.barh(df_ventes_juillet["Produit"], 
+             df_ventes_juillet["Revenu Juillet"],
+             color="#C8A96E")
+    ax1.set_xlabel("Revenu (FCFA)")
+    ax1.grid(axis="x")
+    st.pyplot(fig1)
+
+with col2:
+    st.markdown("**Ventes par produit — Août**")
+    fig2, ax2 = plt.subplots(figsize=(6, 4))
+    df_ventes_aout = df_ventes[df_ventes["Revenu Août"] > 0]
+    ax2.barh(df_ventes_aout["Produit"],
+             df_ventes_aout["Revenu Août"],
+             color="#8B5E3C")
+    ax2.set_xlabel("Revenu (FCFA)")
+    ax2.grid(axis="x")
+    st.pyplot(fig2)
+
+# Évolution mensuelle
+st.markdown("**📊 Évolution mensuelle — Revenus vs Charges**")
+fig3, ax3 = plt.subplots(figsize=(10, 4))
+mois = ["Juillet", "Août"]
+ax3.plot(mois, [total_juillet, total_aout], 
+         color="#C8A96E", marker="o", linewidth=2, label="Revenus")
+ax3.plot(mois, [charges_juillet, charges_aout],
+         color="#E74C3C", marker="o", linewidth=2, label="Charges")
+ax3.plot(mois, [benefice_juillet, benefice_aout],
+         color="#2ECC71", marker="o", linewidth=2, label="Bénéfice")
+ax3.legend()
+ax3.grid(True)
+ax3.set_ylabel("FCFA")
+st.pyplot(fig3)
