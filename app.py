@@ -25,8 +25,8 @@ df_ventes = pd.DataFrame(ventes)
 charges = {
     "Catégorie": ["Matières premières", "Livraison", 
                   "Publicité TikTok", "Emballage", "Autres"],
-    "Juillet": [50000, 11500, 0, 25000, 4000],
-    "Août": [10000, 22750, 0, 0, 4000]
+    "Juillet": [51000, 11500, 0, 25000, 4000],
+    "Août": [90900, 22750, 0, 0, 4000]
 }
 df_charges = pd.DataFrame(charges)
 
